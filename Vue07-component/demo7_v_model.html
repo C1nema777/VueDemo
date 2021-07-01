@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在组件中使用v-model</title>
+  <link rel="stylesheet" href="./template.css">
+</head>
+<body>
+  <div id="app">
+    您现在的余额是：{{total}}
+    <input type="text" v-model="abc">---{{abc}}
+    <!-- <son-component @change="handleTotal"></son-component> -->
+    <son-component v-model="total"></son-component>
+    v-model其实就是绑定了input事件
+    当触发input时，input事件就会自动接收传递过来的参数，并触发已绑定的total
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        total: 2000,
+        abc: 666
+      },
+      components: {
+        // 通过“+” “-”号按钮给父组件传递数据
+        "sonComponent": {
+          template: '<div>\
+            <button @click="handleIncrease">+1000</button> \
+            </div>',
+          data() {
+            return { count: 1000 }
+          },
+          methods: {
+            handleIncrease() {
+              this.count += 1000;
+              // this.$emit('change', this.count)
+              this.$emit('input', this.count)
+            },
+            handleReduce() {
+              this.count -= 1000
+              this.$emit('change', this.count)
+            }
+          }
+        }
+      },
+      methods: {
+        // handleTotal(total) {
+        //   this.total = total
+        // }
+      }
+    });
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件的使用规则</title>
+</head>
+<body>
+  <div id="app" style="border: 2px solid chartreuse;">
+    <app-compo></app-compo>
+    <button @click="plus">{{count}}</button>
+    <button @click="plus">{{count}}</button>
+    <hr>
+    <btn-compo></btn-compo>
+    <btn-compo></btn-compo>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+
+    const app = new Vue({
+      el: "#app",
+      data: {
+        count: 1
+      },
+      components: {
+        'app-compo': {
+          template: "<div><span>局部组件demo1</span></div>"
+        },
+        'btn-compo': {
+          template: '<button @click="count++">{{count}}</button>',
+          data() {
+            return { count: 0 }
+          }
+        }
+      },
+      methods: {
+        plus() {
+          this.count++
+        }
+      }
+    });
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>指令和事件</title>
+  <style>
+    .transRed {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="instruct">
+    {{ apple }} <br>
+    v-text：<span v-text="apple"></span>
+    <hr>
+    {{ banana }} <br>
+    v-html：<span v-html="banana"></span>
+    <hr>
+    <div v-bind:class="className">v-bind绑定活的属性</div>
+    <div :class="className">v-bind语法糖 : </div>
+    <hr>
+    <button v-on:click="count()">v-on绑定事件 {{ countNum }}</button>
+    <button @click="count()">v-on语法糖 @ {{ countNum }}</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: "#instruct",
+      data: {
+        apple: "苹果",
+        banana: '<span style="color: pink;">香蕉</span>',
+        className: 'transRed',
+        countNum: 0,
+        date: new Date()
+      },
+      methods: {
+        count() {
+          this.countNum = this.countNum + 1
+        }
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第二个参数</title>
+  <link rel="stylesheet" href="./template.css">
+</head>
+<body>
+  <div id="app">
+    <child></child>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        
+      },
+      components: {
+        child: {
+          render(createElement) {
+            // 第二个参数可选，是数据对象，只能是Object
+            return createElement({
+              template:'<div>我是龙的传人</div>'
+            }, {
+              class: {
+                foo: true,
+                baz: false
+              },
+              style: {
+                color: 'red',
+                fontSize: '16px'
+              },
+              attrs: {
+                id: 'foo',
+                src: 'http://baidu.com'
+              },
+              // 用来写原生的Dom属性
+              domProps: {
+                innerHTML:'<span style="color:blue;font-size: 18px">我是蓝色</span>'
+              }
+            })
+          }
+        }
+      },
+    });
+  </script>
+  
+</body>
+</html>

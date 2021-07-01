@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件编译的作用域</title>
+  <link rel="stylesheet" href="./template.css">
+</head>
+<body>
+  <div id="app">
+    <my-component v-show="childShow"></my-component>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: '父组件的内容',
+        childShow: false
+      },
+      components: {
+        "myComponent": {
+          // template 子组件作用域
+          template: "<div v-show='childShow'>一个组件</div>",
+          data() {
+            return { message: '子组件的内容', childShow: true }
+          }
+        }
+      },
+    });
+  </script>
+  
+</body>
+</html>

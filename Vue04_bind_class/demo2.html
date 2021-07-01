@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>绑定class</title>
+  <style>
+    .divStyle {
+      background-color: darkred;
+      width: 50px;
+      height: 50px;
+    }
+    .btnBlue {
+      background-color: blue;
+    }
+    .btnRed {
+      background-color: red;
+    }
+    .active {
+      background-color: black;
+      width: 50px;
+      height: 50px;
+    }
+    .error {
+      border: 5px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    绑定class对象语法：对象的键是类名，值是布尔值 <br>
+    <div :class="{ divStyle : isActive }"></div>
+    <hr>
+    <button :class="{ btnBlue:isBlue, btnRed:isRed }" v-on:click="changeColor">
+      点击切换背景颜色
+    </button>
+    <hr>
+    计算属性：<div :class="className"></div>
+    <hr>
+    绑定class数组语法： 数组成员直接对应className类名
+    <div :class="[activeClass, errorClass]"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        isActive: true,
+        isBlue: true,
+        isRed: false,
+        activeClass: 'active',
+        errorClass: 'error'
+      },
+      computed: {
+        className() {
+          return { active : this.isActive && !this.isRed }
+        }
+      },
+      methods: {
+        changeColor() {
+          this.isBlue = !this.isBlue
+          this.isRed = !this.isRed
+        }
+      }
+    });
+  </script>
+</body>
+</html>

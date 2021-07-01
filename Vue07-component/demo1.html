@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件的使用方法</title>
+</head>
+<body>
+  <div id="app" style="border: 2px solid chartreuse;">
+    <my-compo></my-compo>
+    <part-compo></part-compo>
+
+    table中只能有tr,td,tbody这些元素
+    <table>
+      <!-- <my-compo></my-compo> -->
+      <tbody is="my-compo"></tbody>
+    </table>
+  </div>
+
+  <div id="bpp" style="border: 2px solid indianred; margin-top: 6px;">
+    <my-compo></my-compo>
+    <part-compo></part-compo>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    // 注册组件
+    Vue.component("my-compo", {
+      template: "<div>全局注册组件demo1</div>"
+    })
+    const app = new Vue({
+      el: "#app",
+      components: {
+        'part-compo': {
+          template: "<div>局部组件demo1</div>"
+        }
+      }
+    });
+    const bpp = new Vue({
+      el: "#bpp",
+    });
+  </script>
+  
+</body>
+</html>

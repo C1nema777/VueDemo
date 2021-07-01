@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单向数据传递</title>
+  <link rel="stylesheet" href="./template.css">
+</head>
+<body>
+  <div id="app">
+    <my-component msg="我是父组件传递的数据"></my-component>
+    <hr>
+    需求：通过input中输入的数据改变div的宽度<br>
+    <!-- 传递的width仅仅是一个数据 -->
+    <input type="text" v-model="width">
+    <width-component :width="width"></width-component>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    // 将传递进来的数据作为初始值进行保存
+    Vue.component("my-component", {
+      props: ['msg'],
+      template: "<div>{{count}}</div>",
+      data() {
+        return {
+          // props中的值可以通过this.xxx直接进行获取
+          count: this.msg
+        }
+      }
+    });
+    // width
+    Vue.component("width-component", {
+      props: ['width'],
+      template: '<div :style="style"></div>',
+      computed: {
+        style() {
+          return {
+            width: this.width + 'px',
+            backgroundColor: 'red',
+            height: '30px'
+          }
+        }
+      }
+    });
+    const app = new Vue({
+      el: "#app",
+      data: {
+        width: 0
+      },
+      components: {
+        
+      },
+    });
+  </script>
+  
+</body>
+</html>

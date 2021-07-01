@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据验证</title>
+  <link rel="stylesheet" href="./template.css">
+</head>
+<body>
+  <div id="app">
+    <type-component :a="a" :b="b" :c="c" :d="d" :g="g"></type-component>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        a: "六",
+        b: 666,
+        c: '',
+        d: 9527,
+        e: [],
+        f: 88,
+        g: console.log()
+      },
+      components: {
+        'typeComponent': {
+          props: {
+            a: String,
+            b: [String, Number],
+            // 必须是布尔类型，如果没有定义，默认值是true
+            c: {
+              type: Boolean,
+              default: true
+            },
+            d: {
+              type: Number,
+              required: true // 必传
+            },
+            e: {
+              type: Array,
+              default() {
+                return [6324]
+              }
+            },
+            // 自定义一个验证函数
+            f: {
+              validator(value) {
+                return value > 10
+              }
+            },
+            g: { type: Function }
+          },
+          template: "<div>{{a}}--{{b}}--{{c}}--{{d}}--{{e[0]}}</div>",
+        }
+      },
+    });
+  </script>
+  
+</body>
+</html>

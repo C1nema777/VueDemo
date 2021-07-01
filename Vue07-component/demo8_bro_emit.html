@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非父组件之间的通信</title>
+  <link rel="stylesheet" href="./template.css">
+</head>
+<body>
+  <div id="app">
+    <a-component ref="a"></a-component>
+    <b-component ref="b"></b-component>
+    <hr>
+    <child-component ref="c"></child-component>---{{msg}} <br>
+    <button @click="getChildData">父组件的按钮，绑定子组件的内容</button>
+    -----{{formChild}}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        // bus中介
+        bus: new Vue(),
+        msg: '数据还未修改',
+        formChild: "还未拿到"
+      },
+      methods: {
+        getChildData() {
+          // 拿子组件中的内容 $refs
+          this.formChild = this.$refs.c.msg
+        }
+      },
+      components: {
+        "aComponent": {
+          template: "<div><button @click='handle'>点击我向B组件传递数据</button></div>",
+          data() {
+            return { aaa: '来自A组件的内容', msg: "A中的msg" }
+          },
+          methods: {
+            handle() {
+              this.$root.bus.$emit('lala', this.aaa)
+            }
+          }
+        },
+        "bComponent": {
+          template: "<div>B组件</div>",
+          data() {
+            return { msg: "B中的msg" }
+          },
+          created() {
+            // A组件在实例创建的时候就监听事件---lala事件
+            this.$root.bus.$on('lala', value => {
+              alert(value)
+            })
+          }
+        },
+        "childComponent": {
+          template: "<button @click='setFatherData'>点击修改父亲的数据</button>",
+          data() {
+            return { msg: "C中的msg" }
+          },
+          methods: {
+            setFatherData() {
+              this.$parent.msg = '数据已经修改了'
+            }
+          }
+        },
+      },
+    });
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>列表渲染</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div id="app">
+    (1)遍历多个对象一定是遍历的数组
+    <ul>
+      <li v-for="item in items">{{ item.name }}</li>
+    </ul>
+    带索引：(item, index) in xx
+    <p v-for="(item, index) in items">{{ index }} -> {{ item.name }}</p>
+    (2)遍历一个对象多个属性：
+    拿value, key, index：(v, k ,i)
+    <div v-for="(value, key, index) in Gods">
+      第{{index}}个：key->{{key}} value->{{value}}
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        items: [
+          {name: "thinking"},
+          {name: "listening"},
+          {name: "practice"},
+        ],
+        Gods: {
+          god1: "姜武圣",
+          god2: "宋至圣",
+          god3: "贡文圣",
+        }
+      },
+    });
+  </script>
+</body>
+</html>

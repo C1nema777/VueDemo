@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修饰符</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div id="app">
+    stop用法：
+    <div @click="divClick()" style="height: 80px; width: 80px; background-color: blue;">
+      <button @click.stop="btnClick()">点击</button>
+    </div>
+    prevent用法：每次提交表单都会重载页面
+    <form action="" @submit.prevent="handle">
+      <button type="submit">提交表单</button>
+    </form>
+    self：只是作用在元素本身而非子元素的时候调用
+    <div @click.self="divClick()" style="height: 80px; width: 80px; background-color: black;">
+      <button @click="btnClick()">点击</button>
+    </div>
+    once：<br>
+    <button @click="onceMethod">点1次就执行1次</button>
+    <button @click.once="onceMethod">点无限次也只执行1次</button>
+    <br> 监听键盘事件：<br> 
+    <input @keyup.13="submitMe">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      methods: {
+        divClick() {
+          alert('div被点击了')
+        },
+        btnClick() {
+          alert("button被点击了")
+        },
+        handle() {
+          alert("不重载了，页面也不刷新了")
+        },
+        onceMethod() {
+          alert("点1次就执行1次")
+        },
+        submitMe() {
+          alert("按下了Enter键")
+        }
+      }
+    });
+  </script>
+</body>
+</html>

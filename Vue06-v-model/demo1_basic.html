@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>基本用法</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="value"><br> {{ value }} <br>
+    <textarea cols="30" rows="10" v-model="msg">textarea初始值</textarea>
+    {{msg}} <hr>
+    单选框：<br>
+    单个单选框：<input type="radio" v-bind:checked="oneRadio">
+    <hr>
+    多个单选框：<br>
+      贡文圣<input type="radio" value="贡文圣" v-model="checkName"> <br>
+      姜武圣<input type="radio" value="姜武圣" v-model="checkName"> <br>
+      宋至圣<input type="radio" value="宋至圣" v-model="checkName"> <br>
+    现在选中的是：{{ checkName }}
+    <hr>
+    复选框：<br>
+      单个复选框 v-bind<input type="checkbox" v-bind:checked="oneRadio"> <br>
+      单个复选框 v-model<input type="checkbox" v-model="oneRadio"> <hr>
+    多个复选框：<br>
+      贡文圣<input type="checkbox" value="贡文圣" v-model="checks"> <br>
+      姜武圣<input type="checkbox" value="姜武圣" v-model="checks"> <br>
+      宋至圣<input type="checkbox" value="宋至圣" v-model="checks"> <br>
+      现在选中了 {{checks}}
+    <hr>
+    单选的下拉框：
+    <select v-model="selected">
+      <option value="文圣">文圣</option>
+      <option value="武圣">武圣</option>
+      <option value="至圣">至圣</option>
+    </select> -->现在选中的是 {{selected}}
+    <hr>
+    多选的下拉框：
+    <select v-model="selectedMul" multiple>
+      <option value="文圣">文圣</option>
+      <option value="武圣">武圣</option>
+      <option value="至圣">至圣</option>
+    </select> -->现在选中的是 {{selectedMul}}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        value: "",
+        msg: "",
+        oneRadio: true,
+        checkName: "姜武圣",
+        checks: [],
+        selected: "",
+        selectedMul: []
+      }
+    });
+  </script>
+</body>
+</html>

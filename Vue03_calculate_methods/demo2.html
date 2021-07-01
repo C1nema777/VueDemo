@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算购物车总价</title>
+</head>
+<body>
+  <div id="demo">
+    购物车总价：{{ prices }}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    // 将text里的str顺序反转
+    let app = new Vue({
+      el: "#demo",
+      data: {
+        package1: [
+          { name: 'iphoneX', price: 10, count: 2 },
+          { name: 'iPad', price: 20, count: 1 }
+        ],
+        package2: [
+          { name: 'iphone8', price: 20, count: 1 },
+          { name: 'iPadX', price: 30, count: 3 }
+        ]
+      },
+      // 计算属性
+      computed: {
+        prices() {
+          let prices = 0
+          // console.log(Array.isArray(this.package1))
+          // console.log(this.package1)
+          this.package1.forEach(goods => {
+            console.log(goods)
+            prices += goods.price * goods.count
+          })
+          this.package2.forEach(goods => {
+            console.log(goods)
+            prices += goods.price * goods.count
+          })
+          return prices
+        }
+      }
+    })
+  </script>
+</body>
+</html>

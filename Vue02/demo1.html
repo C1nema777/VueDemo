@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据绑定</title>
+</head>
+<body>
+  <div id="d1">
+    <!-- 文本插值 -->
+    {{ msg }} <br>
+    {{ 6+6*3 }} --可进行简单的运算<br>
+    {{ 6>3 ? code : msg }} <br>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      // element 用于指定页面中已经存在的Dom元素，挂载到DOM中，也可以是css
+      el: "#d1",
+      // 可以声明应用内需要双向绑定的数据
+      data: {
+        msg: "Vue demo1",
+        code: 0
+      },
+      // created: function() {
+      //   alert('Vue实例 创建完成，还未挂载到DOM')
+      // },
+      // mounted: function() {
+      //   alert('Vue实例 已经挂载到DOM')
+      // }
+    });
+    // 访问Vue实例中的属性
+    console.log(app.$el) // 打印div标签
+    console.log(app.$data) // {__ob__: Observer}
+    // 访问data里的属性
+    console.log(app.msg)
+    console.log(app.code)
+  </script>
+  
+</body>
+</html>

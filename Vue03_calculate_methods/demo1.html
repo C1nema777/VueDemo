@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算属性</title>
+</head>
+<body>
+  <div id="demo">
+    {{ text }} <br>
+    {{ text.split(',').reverse().join(',') }} <br>
+    计算属性：{{ reverseText }}
+    <hr>
+    <!-- F12输入 app.text="3,6,9" 重新渲染页面 -->
+    计算属性缓存 {{ now }} <br>
+    通过methods拿到的时间戳：{{ thisTime() }}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    // 将text里的str顺序反转
+    let app = new Vue({
+      el: "#demo",
+      data: {
+        text: "123,456,789"
+      },
+      computed: {
+        reverseText() {
+          return this.text.split(',').reverse().join(',')
+        },
+        now() {
+          return Date.now()
+        }
+      },
+      methods: {
+        thisTime() {
+          return Date.now()
+        }
+      }
+    })
+  </script>
+</body>
+</html>

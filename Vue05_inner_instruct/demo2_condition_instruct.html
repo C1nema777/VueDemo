@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>条件渲染指令</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div id="app">
+    v-if后面接的是等号，等号里的内容必须是布尔值
+    <p v-if="6<3"> {{apple}} </p>
+    <p v-else-if="9>5"> {{pineapple}} </p>
+    <p v-else="6<3"> {{banana}} </p>
+    <hr>
+    v-if需求：点击按钮，实现用户名输入框和密码框的切换
+    <div v-if="type==='name'">
+      用户名：<input type="text" placeholder="输入用户名" key="name">
+    </div>
+    <div v-else>
+      密码：<input type="password" placeholder="请输入密码">
+    </div>
+    <button v-on:click="toggleType">点击切换</button>
+    <hr>
+    <p v-show="9>a">啊</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        apple: "苹果",
+        banana: "香蕉",
+        pineapple: "菠萝",
+        type: "name",
+        a: 1
+      },
+      methods: {
+        toggleType() {
+          return this.type = (this.type === "name" ? "password" : "name")
+        }
+      }
+    });
+  </script>
+</body>
+</html>

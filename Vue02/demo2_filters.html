@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>过滤器</title>
+</head>
+<body>
+  <div id="dateApp">
+    {{ date }} <br>
+    <!-- 过滤器 | 后面接过滤器名字 -->
+    {{ date | formatDate }}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    // 在月份 日期 小时 小于10时补0
+    const plusDate = value => value < 10 ? '0'+value : value
+    // 在页面中显示当前时间
+    let app = new Vue({
+      el: "#dateApp",
+      data: {
+        date: new Date()
+      },
+      filters: {
+        formatDate(value) {
+          let date = new Date(value)
+          let year = date.getFullYear()
+          let month = plusDate(date.getMonth()+1)
+          let day = plusDate(date.getDate())
+          let hour = plusDate(date.getHours())
+          let min = plusDate(date.getMinutes())
+          let sec = plusDate(date.getSeconds())
+          return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec
+        }
+      },
+      mounted() {
+        let self = this // this指向Vue实例
+        let timer = setInterval(() => {
+          self.date = new Date()
+        }, 1000)
+      },
+      beforeDestroy() {
+        if(this.timer) {
+          clearInterval(this.timer)
+        }
+      }
+        
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>this.$slots在render函数里的应用</title>
+  <link rel="stylesheet" href="./template.css">
+</head>
+<body>
+  <div id="app">
+    <my-component>
+      <p>锄禾日当午</p>
+      <p>汗滴禾下土</p>
+      <H3 slot="header">我是标题</H3>
+      <H5 slot="footer">我是文章的最后一段</H5>
+    </my-component>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      components: {
+        myComponent: {
+          render(createElement) {
+            // debugger
+            let header = this.$slots.header; // 返回的内容就是含有=VNODE的数组
+            let main = this.$slots.default;
+            let footer = this.$slots.footer;
+            return createElement('div', [
+              createElement('header', header),
+              createElement('main', main),
+              createElement('footer', footer)
+            ]);
+          }
+        }
+      },
+    });
+  </script>
+  
+</body>
+</html>

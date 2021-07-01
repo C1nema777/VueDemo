@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组更新</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-for="study in arr">{{study}}</div>
+    <button @click="sortArr">点击排序</button>
+    <button @click="reverseArr">数组反转</button>
+    <hr>
+    返回字符串含有OO的项：
+    {{ matchOO }}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        arr: ['book' ,'pen', 'pencil']
+      },
+      computed: {
+        matchOO() {
+          // 参数代表要过滤的每一项
+          return this.arr.filter(book => book.match(/oo/))
+        }
+      },
+      methods: {
+        sortArr() {
+          this.arr.sort((a ,b) => a.length - b.length)
+        },
+        reverseArr() {
+          this.arr.reverse()
+        },
+        
+      }
+    });
+    // Vue.set(app.arr, 1, "car")
+  </script>
+</body>
+</html>

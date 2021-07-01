@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>父组件向子组件传递数据</title>
+  <link rel="stylesheet" href="./template.css">
+</head>
+<body>
+  <div id="app">
+    <h5 style="text-align: center;">父组件</h5>
+    <child-component msg="来自父组件的内容"></child-component>
+    <child-component msg="[3,6,9]"></child-component>
+    <child-component :msg="[3,6,9]"></child-component>
+
+    <hr>用v-bind进行数据的动态绑定：把input中的msg传递给子组件
+    <input type="text" v-model="parentMsg">
+    <bind-component v-bind:msg="parentMsg"></bind-component>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        parentMsg: "德云色"
+      },
+      components: {
+        'child-component': {
+          props: ['msg'],
+          template: '<div style="border: 2px solid red;">{{msg}}</div>',
+          data() {
+            return { count: 1 }
+          }
+        },
+        'bind-component': {
+          props: ['msg'],
+          template: '<div style="border: 2px solid red;">{{msg}}</div>',
+          data() {
+            return { count: 1 }
+          }
+        },
+      },
+    });
+  </script>
+  
+</body>
+</html>

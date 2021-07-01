@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数化组件</title>
+  <link rel="stylesheet" href="./template.css">
+</head>
+<body>
+  <div id="app">
+    <my-component value="haha"></my-component>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        msg: '我是父组件的内容'
+      },
+      components: {
+        // this.text -> context.props.text
+        // this.$slots.default -> context.children
+        "myComponent": {
+          props: ['value'],
+          functional: true, // 表示当前的Vue实例无状态。无实例（没有this）
+          render(createElement, context) {
+            return createElement('button', {
+              on: {
+                click() {
+                  // debugger
+                  // alert(this.value) // 这里的this指向window对象
+                  console.log(context)
+                  console.log(context.parent)
+                  alert(context.parent.msg)
+                  console.log(context.props.value)
+                }
+              }
+            }, 'third->点击')
+          }
+        }
+      },
+    });
+  </script>
+  
+</body>
+</html>

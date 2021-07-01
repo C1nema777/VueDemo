@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>绑定值</title>
+</head>
+<body>
+  <div id="app">
+    绑定值：<br>
+    单选按钮：<input type="radio" v-model="picked" v-bind:value="value"> picked：{{picked}}
+    <hr>
+    复选框：选中 和 不选中 的value不一样
+    <input type="checkbox" v-model="toggle" :true-value="v1" :false-value="v2">
+    <br> {{toggle}} <br>
+    被选中：{{toggle == v1}} <br>
+    未被选中：{{toggle == v2}} <br>
+    <hr>
+    下拉框：
+    <select v-model="selectedMul" :value="{num:111}">
+      <option value="文圣">文圣</option>
+      <option value="武圣">武圣</option>
+      <option value="至圣">至圣</option>
+    </select> -->现在选中的是 {{selectedMul}}
+    <hr>
+    下拉框：
+    <select v-model="selectedMul">
+      <option :value="{num:111}">文圣</option>
+    </select> -->现在选中的是 {{typeof selectedMul}} -> {{selectedMul.num}}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        picked: true,
+        value: "111",
+        toggle: true,
+        v1: "我被选中了",
+        v2: "我没有被选中",
+        selectedMul: ""
+      }
+    });
+  </script>
+</body>
+</html>
